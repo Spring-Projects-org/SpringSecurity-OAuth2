@@ -1,0 +1,37 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.9.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+}
+
+group = 'com.spring.boot.security'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//implementation  'org.springframework.boot:spring-boot-starter-data-jpa'
+	//For OAuth2 Auto configure
+	// https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2
+    compile group: 'org.springframework.security.oauth.boot', name: 'spring-security-oauth2-autoconfigure', version: '2.2.0.RELEASE'
+	
+	
+	// For database Operation
+	//implementation  'org.springframework.boot:spring-boot-starter-data-jpa'
+	
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	
+// https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jasper
+//compile group: 'org.apache.tomcat', name: 'tomcat-jasper', version: '9.0.1'
+//excluding as below jar is creating issue while starting apache tomcat due to conflict of class JreCompat
+compile ('org.apache.tomcat:tomcat-jasper:9.0.1') 
+{
+exclude module:'tomcat-util'
+}
+}
